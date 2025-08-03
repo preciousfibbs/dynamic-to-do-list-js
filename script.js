@@ -1,10 +1,10 @@
 document.addEventListener("DOMContentLoaded", function () {
-  // Select DOM elements
-  const addButton = document.getElementById("add-button");
+  // Select DOM elements using correct IDs
+  const addButton = document.getElementById("add-task-btn");
   const taskInput = document.getElementById("task-input");
   const taskList = document.getElementById("task-list");
 
-  // Define addTask function
+  // Define the addTask function
   function addTask() {
     const taskText = taskInput.value.trim();
 
@@ -13,7 +13,7 @@ document.addEventListener("DOMContentLoaded", function () {
       return;
     }
 
-    // Create list item
+    // Create new list item
     const li = document.createElement("li");
     li.textContent = taskText;
 
@@ -22,16 +22,16 @@ document.addEventListener("DOMContentLoaded", function () {
     removeButton.textContent = "Remove";
     removeButton.className = "remove-btn";
 
-    // Add remove functionality
+    // On click, remove the task
     removeButton.onclick = function () {
       taskList.removeChild(li);
     };
 
-    // Append button to li and li to ul
+    // Add to DOM
     li.appendChild(removeButton);
     taskList.appendChild(li);
 
-    // Clear input field
+    // Clear input
     taskInput.value = "";
   }
 
