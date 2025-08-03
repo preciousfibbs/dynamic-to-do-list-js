@@ -1,9 +1,11 @@
-document.addEventListener("DOMContentLoaded", () => {
-  const addTaskButton = document.getElementById("add-task");
+document.addEventListener("DOMContentLoaded", function () {
+  // Select DOM elements
+  const addButton = document.getElementById("add-button");
   const taskInput = document.getElementById("task-input");
   const taskList = document.getElementById("task-list");
 
-  addTaskButton.addEventListener("click", () => {
+  // Define addTask function
+  function addTask() {
     const taskText = taskInput.value.trim();
 
     if (taskText === "") {
@@ -11,19 +13,33 @@ document.addEventListener("DOMContentLoaded", () => {
       return;
     }
 
+    // Create list item
     const li = document.createElement("li");
     li.textContent = taskText;
 
-    const deleteButton = document.createElement("button");
-    deleteButton.textContent = "Delete";
-    deleteButton.onclick = () => {
-      li.remove();
+    // Create remove button
+    const removeButton = document.createElement("button");
+    removeButton.textContent = "Remove";
+    removeButton.className = "remove-btn";
+
+    // Add remove functionality
+    removeButton.onclick = function () {
+      taskList.removeChild(li);
     };
 
-    li.appendChild(deleteButton);
+    // Append button to li and li to ul
+    li.appendChild(removeButton);
     taskList.appendChild(li);
 
+    // Clear input field
     taskInput.value = "";
-    taskInput.focus();
+  }
+
+  // Event listeners
+  addButton.addEventListener("click", addTask);
+  taskInput.addEventListener("keypress", function (event) {
+    if (event.key === "Enter") {
+      addTask();
+    }
   });
 });
